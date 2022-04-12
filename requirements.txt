@@ -1,0 +1,11 @@
+flask~=2.0
+six==1.15.0
+google==3.0.0
+google-cloud-translate==3.7.2
+google-api-core==2.7.1
+google-auth==2.6.3
+google-cloud-core==2.3.0
+googleapis-common-protos==1.56.0
+grpcio==1.44.0
+grpcio-status==1.44.0
+idna==3.3
