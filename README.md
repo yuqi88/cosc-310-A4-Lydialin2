@@ -8,7 +8,7 @@ Elon Musk Bot is a chatbot inspired by the entrepreneur and billionaire Elon Mus
 
 ## Talking to the Bot
 
-The bot is available at https://t.me/COSC310_ElonMusk_Dialogflow_bot
+The bot is available at https://t.me/cosc310a4bot
 
 ## Executing Tests
 
@@ -27,6 +27,10 @@ python -m unittest discover tests
 
 ```
     .
+    ├── api                             # The newly added APIs
+    │   ├── cosc310-a4-a69bdccce6f2.json # Key for Google Translate
+    │   ├── img_api.py                  # Funciton key for Wolfram Alpha
+    │   ├── translator.py               # Logic for Google Translate
     ├── elonmusk                        # Code for the Python back-end
     │   ├── main.py                     # Entrypoint for Cloud Function
     │   ├── intent_handlers.py          # Logic for each Intent (i.e. Topic) Elon can talk about
@@ -45,120 +49,38 @@ python -m unittest discover tests
     └── README.md                       # This file!
 ```
 
-## Features added in Assignment 3
+## Features added in Assignment 4
 
-### GUI Improvements (1 point)
+### Added APIs (5 points for each API):
 
-We use Telegram's user interface as a way of giving a face to our bot. By incorporating the already popular and polished platform were able to vastly improve on the GUI. 
+1. Google Translate  - used to detect non-English languages
+2. Wolfram API -  used to grab images
 
-The bot is available at https://t.me/COSC310_ElonMusk_Dialogflow_bot, and users can talk to the bot in any platform that Telegram 
-is supported. For example, on Android the interface looks like:
+####Demo of the API usage:
+1. Google Translate:
 
-<p align="center"> 
-<img width="400" height="800" src="static/img/GUI.png">
-</p>
-
-### Improvements using language toolkits
-
-#### Entity analysis (2 points)
-
-By enabling the bot to pick out proper nouns used in the conversation we are able to improve the accuracy of the bot's responses by gauging the topic of conversation quicker than before. Thereby we improve the user's overall experience by saving them from having to repeat themselves. As seen below, the bot is able to identify Tesla and Model S as entities.
+Uses RESTful API Google Translate to detect non-English languages. <br>
+When users enter non-English language sentence as input, Google Translate Api detects which language that is and returns to the program. The program then tells the users what languages they were typing, and English input is required to talk to the Elon Musk bot. <br>
+(Here is an example of typing "hello" in Chinese)
 
 <p align="center"> 
-<img width="1252" height="213" src="static/img/entity.png">
+<img width="524" height="274" src="static/img/translate api.png">
 </p>
 
-To detect entities, we manually defined the entity types of our training set in Dialogflow:
+2. Wolfram API:
+
+Uses simple API Wolfram API to grab integrated information of the theme asked the bot as an image.
+When users ask the Elon Musk bot certain topics, the bot not only gives text response, it also provides information images related to the input from the users. <br>
+ (Here in the picture we have bitcoin for example)
 
 <p align="center"> 
-<img width="800" height="500" src="static/img/EntityPage.png">
+<img width="532" height="702" src="static/img/wolfram api.png">
 </p>
 
-Inside each entity we defined, we provided the items we want to detect. For example, to detect the models Tesla sells as seen in the previous chat, we created the "Models" entity:
-
-<p align="center"> 
-<img width="800" height="300" src="static/img/ModelsExample.png">
-</p>
-
-#### Sentiment analysis (2 points)
-
-With Dialogflow, we are able to analyse beyond just the individual words the user is saying. That happens with Sentiment Analysis which is also called Intent Analysis in Dialogflow.
-
-In order for Dialogflow to perform Sentiment Analysis, we provided it with training phrases. For example, to talk about companies, we provide Dialogflow with sentences such as "Tell me more about SpaceX" and annotate that SpaceX is an entity of the type "Company".
-
-<p align="center"> 
-<img width="800" height="600" src="static/img/SentimentAnalysisTraining.png">
-</p>
-
-If we provide enough training sentences, Dialogflow detects the sentiment correctly. We emphasize that the training set does not need to be extensive to detect the sentiment, take for example the following conversation:
-
-<p align="center"> 
-<img width="800" height="600" src="static/img/SentimentAnalysisChat.png">
-</p>
-
-Dialogflow can answer about Tesla even though the training sentence is "Tell me more about SpaceX". It can also generalize 
-sentiment analysis to words it has never seen. "Elucidate" never appeared in the training set, but our bot still answered the question
-correctly. Lastly, Sentiment Analysis is not only based on Entity Analysis: if we ask "I want to work at SpaceX", the bot detects
-a different intent and talks about the positions available.
-
-#### Synonym Recognition (2 points)
-
-By being able to recognize common synonyms used by the user, the bot is a able to respond to a wider variety of inputs. This enriches the user experience as they get a greater freedom when it comes to choosing how they phrase their question. This allows them to have a more natural conversation with the bot. As seen below, we are able to use 'red' in place of 'crimson' and the bot can still provide an accurate answer
-
-<p align="center"> 
-<img width="1252" height="214" src="static/img/synonym.png">
-</p>
-
-### Extra topics (0.5 points)
-
-We have expanded the topics Elon Musk bot can talk about. The current list is:
-
-* Crypto
-* Billionaire Tax
-* Tesla
-* SpaceX
-* Neuralink
-* Ukraine War **(new topic)**
-* Daily Routine **(new topic)**
-
-### Out of Scope Responses (0.5 points)
-
-We created an Out of Scope intent in Dialogflow. When Sentiment Analysis cannot match a sentence to an existing intent, we send one predefined response using Elon's sarcasm. Take a look at the example chat where we greet Elon in French and ask if he speaks French:
-
-<p align="center"> 
-<img width="800" height="300" src="static/img/OutOfScope.png">
-</p>
-
-
-### Github Repo with commit history
-
-Link to repo: https://github.com/cosc-310-group32/Assignment3/tree/main .
-The branch structure **as of 2022-03-17** can be found below. Each branch maps to one Pull Request, with `main` as the branch with working code.
-<p align="center"> 
-<img width="1223" height="448" src="static/img/branch.png">
-</p>
-
-### Level 0 data flow diagram
-
-The Level 0 diagram can be found below:
-<p align="center"> 
-<img width="1480" height="421" src="static/img/lvl0DFD.png">
-</p>
-
-Explanation: When the user first connects to the bot they send a message to dialogflow which passes it on to the bot to start the session. Every question asked by the user is analysed by dialogflow and then parsed to the bot once it has been converted to its closest match on the database. The bot then returns the result based on the closest match and that result is sent over to the user through dialogflow.  
-
-### Level 1 data flow diagram
-
-The level 1 dataflow diagram can be found below:
-<p align="center"> 
-<img width="1635" height="960" src="static/img/lvl1DFD.png">
-</p>
-
-Explanation: When the user connects to dialogflow using telegram, they send a 'start bot' message that is passed on to the bot to start the session as a closest matched question. Every subsequent query is analysed for synonyms, sentiment, and entities while being processed and dialogflow finds the closest match to the processed query from the database of information that is available to the bot. This question is then sent to the bot which then looks up the answer and responds with the answer to the question. This answer is, in turn, displayed to the user on the telegram GUI.
 
 ### Sample output and Limitations
 
-#### Sample output (30 turns)
+#### Sample output (30 turns) from Assignment 3
 
 Below is a sample output showcasing our new features: dealing with out-of-context responses, entity recognition, synonym recognition, sentiment analysis, and the addition of two new topics (Ukraine War and Elon's daily routine).
 
@@ -215,12 +137,17 @@ However, it also correctly recognised the word "Neuralnk" as referring to Neural
 * [Python](https://www.python.org/) - Back End
 * [Dialogflow](https://cloud.google.com/dialogflow/docs) - Natural Language Processing
 * [Telegram](https://telegram.org/) - User Interface
+* [Google Translate](https://cloud.google.com/translate/docs/basic/translating-text) - Input language detector
+* [Wolfram Alpha APIs](https://products.wolframalpha.com/simple-api/documentation/) - Information images provider
 
 ## Authors
-
+Assignment1,2,3
 - [Kiet Phan](https://github.com/ketphan02)
 - [Ivan Carvalho](https://github.com/IvanIsCoding)
 - [Lydia Lin](https://github.com/yuqi88)
 - [Akshat Singal](https://github.com/aksingal-dev)
 - [Paula Wong-Chung](https://github.com/KafkaNoNeko)
+
+Assigment 4
+- [Lydia Lin](https://github.com/yuqi88)
 
