@@ -25,6 +25,7 @@ on a new line, and put
 ```
 WOLFRAM_API_APPID=' paste your WolFram API appID here'
 ```
+in the .env file
 
 ## Code Structure
 
