@@ -1,2 +1,7 @@
+from dotenv import load_dotenv
+load_dotenv()
+import os
+import json
+
 def appID():
-    return '4K5EW9-RY3Q25UHYJ'
+    return json.load(os.environ.get("WOLFRAM_API_APPID"))

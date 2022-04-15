@@ -10,25 +10,27 @@ Elon Musk Bot is a chatbot inspired by the entrepreneur and billionaire Elon Mus
 
 The bot is available at https://t.me/cosc310a4bot
 
-## Executing Tests
-
-[Install Python](https://realpython.com/installing-python/) on your machine and ensure you have the dependencies installed with:
-
+## Setting up the environment variables file
+###Step1: Sign up for API keys
+1. Go to [Google - Cloud Translate](https://cloud.google.com/translate/docs/setup). Follow the steps on it to get your service account key file. 
+2. Go to [Wolfram Alpha APIs](https://products.wolframalpha.com/simple-api/documentation/). Follow the step to  get your API key.
+###Step2: Put the API keys in the .env file
+1. Create an file named .env in the root of the project
+2. open it and have
 ```
-pip install -r requirements.txt
+GOOGLE_APPLICATION_CREDENTIALS='paste the json key you 
+download from google in step1 here'
+```
+on a new line, and put
+```
+WOLFRAM_API_APPID=' paste your WolFram API appID here'
 ```
 
-To execute the tests, run the following command at the root of the repository:
-
-```
-python -m unittest discover tests
-```
 ## Code Structure
 
 ```
     .
     ├── api                             # The newly added APIs
-    │   ├── cosc310-a4-a69bdccce6f2.json # Key for Google Translate
     │   ├── img_api.py                  # Funciton key for Wolfram Alpha
     │   ├── translator.py               # Logic for Google Translate
     ├── elonmusk                        # Code for the Python back-end
@@ -46,7 +48,9 @@ python -m unittest discover tests
     │   ├── test_stand_with_ukraine.py  # Elon can offer his opinion on the current situation in Ukraine 
     │   ├── test_what_company.py        # Elon can answer about his companies
     │   ├── test_what_is_crypto.py      # Elon can answer questions related to crypto
+    ├── .env                            # Please manually add this file following the instructions above
     └── README.md                       # This file!
+    
 ```
 
 ## Features added in Assignment 4
@@ -56,7 +60,7 @@ python -m unittest discover tests
 1. Google Translate  - used to detect non-English languages
 2. Wolfram API -  used to grab images
 
-####Demo of the API usage:
+#### Demo of the API usage:
 1. Google Translate:
 
 Uses RESTful API Google Translate to detect non-English languages. <br>

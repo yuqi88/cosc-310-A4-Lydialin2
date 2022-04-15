@@ -1,6 +1,9 @@
+from dotenv import load_dotenv
+load_dotenv()
 import os
 import six
 from google.cloud import translate_v2 as translate
+import json
 
 
 def translate_text(text, target='en'):
@@ -9,7 +12,7 @@ def translate_text(text, target='en'):
     Target must be an ISO 639-1 language code.
     See https://g.co/cloud/translate/v2/translate-reference#supported_languages
     """
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="cosc310-a4-a69bdccce6f2.json"
+    json.load(os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"))
     translate_client = translate.Client()
 
     if isinstance(text, six.binary_type):
