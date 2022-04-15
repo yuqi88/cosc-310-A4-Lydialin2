@@ -11,10 +11,10 @@ Elon Musk Bot is a chatbot inspired by the entrepreneur and billionaire Elon Mus
 The bot is available at https://t.me/cosc310a4bot
 
 ## Setting up the environment variables file
-###Step1: Sign up for API keys
+### Step1: Sign up for API keys
 1. Go to [Google - Cloud Translate](https://cloud.google.com/translate/docs/setup). Follow the steps on it to get your service account key file. 
 2. Go to [Wolfram Alpha APIs](https://products.wolframalpha.com/simple-api/documentation/). Follow the step to  get your API key.
-###Step2: Put the API keys in the .env file
+### Step2: Put the API keys in the .env file
 1. Create an file named .env in the root of the project
 2. open it and have
 ```
